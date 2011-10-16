@@ -1,0 +1,72 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" type="text/css" href="../extjs3/examples/ux/css/ux-all.css" />
+  <link rel="stylesheet" type="text/css" href="../extjs3/resources/css/ext-all.css">
+  <link rel="stylesheet" type="text/css" href="./ticker.css">
+    
+  <script type="text/javascript" src="../extjs3/adapter/ext/ext-base.js"></script>
+  <script type="text/javascript" src="../extjs3/ext-all-debug.js"></script>
+  <script type="text/javascript" src="../extjs3/examples/ux/ux-all.js"></script>
+    
+ <!-- extensions -->
+ <script type="text/javascript" src="./Ext.ux.Ticker.js"></script> 
+ <title id='page-title'>Ticker Example</title>
+  <script type="text/javascript">
+     Ext.BLANK_IMAGE_URL = '../extjs3/resources/images/default/s.gif';
+
+     Ext.onReady(function(){
+
+       var msgHandler = function(id, msg) {
+         Ext.Msg.alert("Info", "You click ticker msg id: " + id + ", message " + msg);
+       };
+
+       var ticker = new Ext.ux.Ticker({
+         id: 'ticker',
+         width: 450,
+         autoHeight: true,
+         direction: 'left',
+         store: new Ext.data.JsonStore({
+           url: './ticker.json',
+           fields: [ 'id', 'time', 'type', 'message' ],
+           messageProperty: 'message',
+           successProperty: 'success',
+           idProperty: 'id',
+           root: 'rows',
+           autoLoad: false
+         })
+       });
+
+       ticker.bindMsgHandler('info', msgHandler);
+       ticker.bindMsgHandler('warn', msgHandler);
+ 
+       var statusbar = new Ext.ux.StatusBar({
+         id: 'statusbar',
+         defaultText: '',
+         layout: 'toolbar',
+         items: [
+           // Event/Alert ticker
+           ticker
+         ]
+       });
+
+       var win = new Ext.Window({
+         width: 500,
+         height: 300,
+         title: 'Ticker example',
+         html: '<h1>Click on the ticker event will pop up a message window</h1>',
+         bbar: statusbar
+       });
+
+       win.show();
+
+       ticker.start();
+       Ext.QuickTips.init();
+
+     });
+
+  </script>
+</head>
+<body></body>
+</html>
+

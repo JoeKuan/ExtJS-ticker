@@ -1,0 +1,23 @@
+{ result: 'success',
+  rows: [{
+     id: 1,
+     time: 1318649077,
+     type: 1,
+     message: 'Info test message 1'
+   }, {
+     id: 2,
+     time: 1318650077,
+     type: 1,
+     message: 'Info test message 2'
+   }, {
+     id: 3,
+     time: 1328649077,
+     type: 2,
+     message: 'Warn test message 1'
+   }, {
+     id: 4,
+     time: 1338651001,
+     type: 2,
+     message: 'Warn test message 2'
+  }]
+}
